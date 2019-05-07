@@ -44,7 +44,6 @@ Park.prototype.removeSpecies = function(species) {
   } while (dinosToRemove.length != 0);
 }
 
-// const result = words.filter(word => word.length > 6);
 
 Park.prototype.totalVisitsPerDay = function() {
   let total = 0;
@@ -60,6 +59,22 @@ Park.prototype.totalVisitsPerYear = function() {
 
 Park.prototype.totalRevenuePerYear = function() {
   return this.totalVisitsPerYear() * this.ticketPrice;
+}
+
+Park.prototype.dietTypesAndAmount = function() {
+  var diets = this.dinosaurs.map(dino => dino.diet);
+
+  var countedDiets = diets.reduce(function (allDiets, diet) {
+    if (diet in allDiets) {
+      allDiets[diet]++;
+    }
+    else {
+      allDiets[diet] = 1;
+    }
+    return allDiets;
+  }, {});
+
+  return countedDiets;
 }
 
 module.exports = Park;
